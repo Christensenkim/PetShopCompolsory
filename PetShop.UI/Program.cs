@@ -19,10 +19,7 @@ namespace PetShop.UI
             serviceCollection.AddScoped<IPrinter, Printer>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            var petService = serviceProvider.GetRequiredService<IPetShopService>();
-
-            new Printer(petService);
-
+           
             var printer = serviceProvider.GetRequiredService<IPrinter>();
 
             printer.StartUI();
