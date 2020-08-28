@@ -53,7 +53,7 @@ namespace PetShop.Infrastructure.Data
             List<Pet> listofSearchedPetByType = new List<Pet>();
             foreach (var pet in _fakeDB.GetListOfPets())
             {
-                if(pet.PetType == searchedType)
+                if(pet.PetType.ToLower() == searchedType.ToLower())
                 {
                     listofSearchedPetByType.Add(pet);
                 }

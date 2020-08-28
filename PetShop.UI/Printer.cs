@@ -43,9 +43,9 @@ namespace PetShop.UI
                             Console.WriteLine("What type is the pet?");
                             string petType = Console.ReadLine();
                             Console.WriteLine("What date was the pet born? (YYYY-MM-DD)");
-                            DateTime petBirthday = DateTime.Parse(Console.ReadLine());
+                            DateTime petBirthday = ValidDateTime();
                             Console.WriteLine("What date was the pet sold? (YYYY-MM-DD)");
-                            DateTime petSoldDate = DateTime.Parse(Console.ReadLine());
+                            DateTime petSoldDate = ValidDateTime();
                             Console.WriteLine("What color is the pet?");
                             string petColer = Console.ReadLine();
                             Console.WriteLine("Who was the previous owner of the pet?");
@@ -75,9 +75,9 @@ namespace PetShop.UI
                             Console.WriteLine("Pet type");
                             var newtype = Console.ReadLine();
                             Console.WriteLine("Pet birthday");
-                            var newBirthday = DateTime.Parse(Console.ReadLine());
+                            var newBirthday = ValidDateTime();
                             Console.WriteLine("Pet salesdate");
-                            var newSoldDay = DateTime.Parse(Console.ReadLine());
+                            var newSoldDay = ValidDateTime();
                             Console.WriteLine("Pet Coler");
                             var newColor = Console.ReadLine();
                             Console.WriteLine("Previous Owner");
@@ -184,6 +184,16 @@ namespace PetShop.UI
                     Console.WriteLine("Not a valid ID");
                 }
                 return id;
+            }
+
+            DateTime ValidDateTime()
+            {
+                DateTime datetime;
+                while (!DateTime.TryParse(Console.ReadLine(), out datetime))
+                {
+                    Console.WriteLine("Not a valid date, try again (YYYY-MM-DD)");
+                }
+                return datetime;
             }
         }
     }
