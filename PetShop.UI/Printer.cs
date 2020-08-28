@@ -51,7 +51,7 @@ namespace PetShop.UI
                             Console.WriteLine("Who was the previous owner of the pet?");
                             string previousOwner = Console.ReadLine();
                             Console.WriteLine("what is the price of the pet?");
-                            double petPrice = double.Parse(Console.ReadLine());
+                            double petPrice = ValidDouble();
 
                             Pet newPet = _petShopService.newPet(petName, petType, petBirthday, petSoldDate, petColer, previousOwner, petPrice);
                             _petShopService.CreatePet(newPet);
@@ -83,7 +83,7 @@ namespace PetShop.UI
                             Console.WriteLine("Previous Owner");
                             var newPreviousOwner = Console.ReadLine();
                             Console.WriteLine("Pet Price");
-                            var newPrice = double.Parse(Console.ReadLine());
+                            var newPrice = ValidDouble();
 
                             _petShopService.UpdatePet(new Pet()
                             {
@@ -154,7 +154,7 @@ namespace PetShop.UI
                         $"Pet Sold: {pet.SoldDate} \n " +
                         $"Pet color: {pet.PetColor} \n " +
                         $"Previous Owner: {pet.PreviousOwner} \n " +
-                        $"Pet Price: {pet.PetPrice} \n");
+                        $"Pet Price: {pet.PetPrice} kr \n");
                 }
                 Console.WriteLine("\n");
             }
@@ -171,7 +171,7 @@ namespace PetShop.UI
                         $"Pet Sold: {pet.SoldDate} \n " +
                         $"Pet color: {pet.PetColor} \n " +
                         $"Previous Owner: {pet.PreviousOwner} \n " +
-                        $"Pet Price: {pet.PetPrice} \n");
+                        $"Pet Price: {pet.PetPrice} kr \n");
                 }
             }
 
@@ -194,6 +194,16 @@ namespace PetShop.UI
                     Console.WriteLine("Not a valid date, try again (YYYY-MM-DD)");
                 }
                 return datetime;
+            }
+
+            double ValidDouble()
+            {
+                double price;
+                while (!double.TryParse(Console.ReadLine(), out price))
+                {
+                    Console.WriteLine("price must be a number without any text");
+                }
+                return price;
             }
         }
     }
