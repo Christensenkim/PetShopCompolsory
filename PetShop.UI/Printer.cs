@@ -26,16 +26,15 @@ namespace PetShop.UI
             Console.WriteLine("6: Sort pets by price from low to high");
             Console.WriteLine("7: List the 5 cheapest pets");
 
-            Console.WriteLine("0: Exit");
-            string optionChoosen = Console.ReadLine();
-            bool isNumber = int.TryParse(optionChoosen, out int number);
+            Console.WriteLine("\n0: Exit");
+
+            bool isNumber = int.TryParse(Console.ReadLine(), out int number);
 
             if (isNumber)
             {
-                int choosenOption = int.Parse(optionChoosen);
-                while(choosenOption > 0)
+                while(number > 0)
                 {
-                    switch (choosenOption)
+                    switch (number)
                     {
                         case 1:
                             Console.WriteLine("Name of the pet?");
