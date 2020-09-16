@@ -75,9 +75,9 @@ namespace PetShop.Core.ApplicationService.Services
             return pet;
         }
 
-        public Pet UpdatePet(Pet updatePet)
+        public Pet UpdatePet(int id, Pet updatePet)
         {
-            var pet = FindPetByID(updatePet.PetId);
+            var pet = FindPetByID(id);
 
             pet.PetName = updatePet.PetName;
             pet.PetType = updatePet.PetType;

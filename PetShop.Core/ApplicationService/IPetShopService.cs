@@ -12,7 +12,7 @@ namespace PetShop.Core.ApplicationService
         public Pet EditPet(Pet petID);
         public Pet DeletePet(int id);
         public Pet FindPetByID(int id);
-        public Pet UpdatePet(Pet pet);
+        public Pet UpdatePet(int id, Pet pet);
         public List<Pet> FindPetsByType(string searchedType);
         public List<Pet> GetListSortedByPrice();
 

@@ -32,7 +32,9 @@ namespace PetShop.WebAPI.Controllers
         [HttpGet]
         public IEnumerable<Pet> Get()
         {
-            return _petservice.GetPets();
+            var pets = _petservice.GetPets();
+
+            return pets;
         }
 
         /// <summary>
@@ -53,9 +55,9 @@ namespace PetShop.WebAPI.Controllers
         /// <param name="pet"></param>
         // POST api/<PetController>
         [HttpPost]
-        public void Post([FromBody] Pet pet)
+        public Pet Post([FromBody] Pet pet)
         {
-            _petservice.CreatePet(pet);
+           return _petservice.CreatePet(pet);
         }
 
         /// <summary>
@@ -67,7 +69,7 @@ namespace PetShop.WebAPI.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] Pet pet)
         {
-            _petservice.UpdatePet(pet);
+            _petservice.UpdatePet(id, pet);
         }
 
         /// <summary>
