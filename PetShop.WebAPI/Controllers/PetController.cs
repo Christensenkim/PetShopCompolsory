@@ -30,11 +30,11 @@ namespace PetShop.WebAPI.Controllers
         /// <returns></returns>
         // GET: api/<PetController>
         [HttpGet]
-        public ActionResult<IEnumerable<Pet>> Get()
+        public ActionResult<IEnumerable<Pet>> Get([FromQuery] string type)
         {
             try
             {
-                return _petservice.GetPets();
+                return _petservice.GetPets(type);
             }
             catch (Exception)
             {

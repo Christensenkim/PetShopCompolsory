@@ -16,6 +16,6 @@ namespace PetShop.Core.ApplicationService
         public List<Pet> FindPetsByType(string searchedType);
         public List<Pet> GetListSortedByPrice();
 
-        public List<Pet> GetPets();
+        public List<Pet> GetPets(string pettype);
     }
 }

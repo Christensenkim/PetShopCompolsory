@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entity;
@@ -82,9 +83,25 @@ namespace PetShop.Infrastructure.Data
             return null;
         }
 
-        public List<Pet> ReadPets()
+        public List<Pet> ReadPets(string petTypeInc)
         {
-            return _fakeDB.GetListOfPets();
+            List<Pet> petsListFiltered = new List<Pet>();
+
+            foreach (var petFromDB in _fakeDB.GetListOfPets())
+            {
+                if(petFromDB.PetType == petTypeInc)
+                {
+                    petsListFiltered.Add(petFromDB);
+                }
+            }
+            if (!petsListFiltered.Any())
+            {
+                return _fakeDB.GetListOfPets();
+            }
+            else
+            {
+                return petsListFiltered;
+            }
         }
     }
 }

@@ -55,9 +55,9 @@ namespace PetShop.Core.ApplicationService.Services
             return _PetRepository.GetListSortedByPrice();
         }
 
-        public List<Pet> GetPets()
+        public List<Pet> GetPets(string petType)
         {
-            return _PetRepository.ReadPets();
+            return _PetRepository.ReadPets(petType);
         }
 
         public Pet newPet(string petName, string petType, DateTime petBirthday, DateTime petSold, string petColor, string previousOwner, double price)
