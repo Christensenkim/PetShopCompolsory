@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using PetShop.Core.ApplicationService;
 using PetShop.Core.Entity;
 
@@ -23,39 +24,101 @@ namespace PetShop.WebAPI.Controllers
 
         // GET: api/<TypeController>
         [HttpGet]
-        public IEnumerable<PetType> Get()
+        public ActionResult<IEnumerable<PetType>> Get()
         {
-            var types = _TypeService.GetTypes();
-
-            return types;
+            try
+            {
+                return _TypeService.GetTypes();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You broke it");
+            }
         }
 
         // GET api/<TypeController>/5
         [HttpGet("{id}")]
-        public PetType Get(int id)
+        public ActionResult<PetType> Get(int id)
         {
-            return _TypeService.FindTypeByID(id);
+            try
+            {
+                var petType = _TypeService.FindTypeByID(id);
+
+                if (petType != null)
+                {
+                    return petType;
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You broke it");
+            }
         }
 
         // POST api/<TypeController>
         [HttpPost]
-        public PetType Post([FromBody] PetType petType)
+        public ActionResult<PetType> Post([FromBody] PetType petType)
         {
-            return _TypeService.CreateType(petType);
+            try
+            {
+                return _TypeService.CreateType(petType);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You Broke it");
+            }
         }
 
         // PUT api/<TypeController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] PetType petType)
+        public ActionResult<PetType> Put(int id, [FromBody] PetType petType)
         {
-            _TypeService.UpdateType(id, petType);
+            try
+            {
+                var petType1 = _TypeService.UpdateType(id, petType);
+
+                if (petType1 == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return petType1;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You Broke it");
+            }
+            
         }
 
         // DELETE api/<TypeController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<PetType> Delete(int id)
         {
-            _TypeService.DeleteType(id);
+            try
+            {
+                var petType = _TypeService.DeleteType(id);
+
+                if (petType == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return petType;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You broke it");
+            }
+            
         }
     }
 }

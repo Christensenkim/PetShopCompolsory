@@ -25,39 +25,99 @@ namespace PetShop.WebAPI.Controllers
 
         // GET: api/<OwnerController>
         [HttpGet]
-        public IEnumerable<Owner> Get()
+        public ActionResult<IEnumerable<Owner>> Get()
         {
-            var owners = _ownerService.GetOwners();
-
-            return owners;
+            try
+            {
+                return _ownerService.GetOwners();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You broke it");
+            }
         }
 
         // GET api/<OwnerController>/5
         [HttpGet("{id}")]
-        public Owner Get(int id)
+        public ActionResult<Owner> Get(int id)
         {
-            return _ownerService.FindOwnerByID(id);
+            try
+            {
+                var owner = _ownerService.FindOwnerByID(id);
+
+                if (owner != null)
+                {
+                    return owner;
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You broke it");
+            }
         }
 
         // POST api/<OwnerController>
         [HttpPost]
-        public Owner Post([FromBody] Owner value)
+        public ActionResult<Owner> Post([FromBody] Owner owner)
         {
-            return _ownerService.CreateOwner(value);
+            try
+            {
+                return _ownerService.CreateOwner(owner);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You Broke it");
+            }
         }
 
         // PUT api/<OwnerController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Owner owner)
+        public ActionResult<Owner> Put(int id, [FromBody] Owner owner)
         {
-            _ownerService.UpdateOwner(id, owner);
+            try
+            {
+                var owner1 = _ownerService.UpdateOwner(id, owner);
+
+                if (owner1 == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return owner1;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You Broke it");
+            }
         }
 
         // DELETE api/<OwnerController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Owner> Delete(int id)
         {
-            _ownerService.DeleteOwner(id);
+            try
+            {
+                var owner = _ownerService.DeleteOwner(id);
+
+                if (owner == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return owner;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You broke it");
+            }
         }
     }
 }

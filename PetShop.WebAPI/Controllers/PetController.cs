@@ -30,11 +30,16 @@ namespace PetShop.WebAPI.Controllers
         /// <returns></returns>
         // GET: api/<PetController>
         [HttpGet]
-        public IEnumerable<Pet> Get()
+        public ActionResult<IEnumerable<Pet>> Get()
         {
-            var pets = _petservice.GetPets();
-
-            return pets;
+            try
+            {
+                return _petservice.GetPets();
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You broke it");
+            }
         }
 
         /// <summary>
@@ -44,9 +49,25 @@ namespace PetShop.WebAPI.Controllers
         /// <returns></returns>
         // GET api/<PetController>/5
         [HttpGet("{id}")]
-        public Pet Get(int id)
+        public ActionResult<Pet> Get(int id)
         {
-            return _petservice.FindPetByID(id);
+            try
+            {
+                Pet pet = _petservice.FindPetByID(id);
+
+                if (pet != null)
+                {
+                    return pet;
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You broke it");
+            }
         }
 
         /// <summary>
@@ -55,9 +76,16 @@ namespace PetShop.WebAPI.Controllers
         /// <param name="pet"></param>
         // POST api/<PetController>
         [HttpPost]
-        public Pet Post([FromBody] Pet pet)
+        public ActionResult<Pet> Post([FromBody] Pet pet)
         {
-           return _petservice.CreatePet(pet);
+            try
+            {
+                return _petservice.CreatePet(pet);
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You Broke it");
+            }
         }
 
         /// <summary>
@@ -67,9 +95,25 @@ namespace PetShop.WebAPI.Controllers
         /// <param name="pet"></param>
         // PUT api/<PetController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Pet pet)
+        public ActionResult<Pet> Put(int id, [FromBody] Pet pet)
         {
-            _petservice.UpdatePet(id, pet);
+            try
+            {
+                var pett = _petservice.UpdatePet(id, pet);
+
+                if(pett == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return pett;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You Broke it");
+            }
         }
 
         /// <summary>
@@ -78,9 +122,25 @@ namespace PetShop.WebAPI.Controllers
         /// <param name="id"></param>
         // DELETE api/<PetController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Pet> Delete(int id)
         {
-            _petservice.DeletePet(id);
+            try
+            {
+                var pet = _petservice.DeletePet(id);
+
+                if (pet == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return pet;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, "You broke it");
+            }
         }
     }
 }
