@@ -65,7 +65,7 @@ namespace PetShop.WebAPI.Controllers
         {
             try
             {
-                return _TypeService.CreateType(petType);
+                return StatusCode(201, _TypeService.CreateType(petType));
             }
             catch (Exception)
             {
@@ -87,7 +87,7 @@ namespace PetShop.WebAPI.Controllers
                 }
                 else
                 {
-                    return petType1;
+                    return StatusCode(202, petType1);
                 }
             }
             catch (Exception)
@@ -111,7 +111,7 @@ namespace PetShop.WebAPI.Controllers
                 }
                 else
                 {
-                    return petType;
+                    return StatusCode(202, petType);
                 }
             }
             catch (Exception)

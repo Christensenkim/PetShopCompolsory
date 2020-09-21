@@ -80,7 +80,7 @@ namespace PetShop.WebAPI.Controllers
         {
             try
             {
-                return _petservice.CreatePet(pet);
+                return StatusCode(201, _petservice.CreatePet(pet));
             }
             catch (Exception)
             {
@@ -107,7 +107,7 @@ namespace PetShop.WebAPI.Controllers
                 }
                 else
                 {
-                    return pett;
+                    return StatusCode(202, pett);
                 }
             }
             catch (Exception)
@@ -134,7 +134,7 @@ namespace PetShop.WebAPI.Controllers
                 }
                 else
                 {
-                    return pet;
+                    return StatusCode(202, pet);
                 }
             }
             catch (Exception)

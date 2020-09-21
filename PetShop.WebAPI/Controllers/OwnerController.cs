@@ -66,7 +66,7 @@ namespace PetShop.WebAPI.Controllers
         {
             try
             {
-                return _ownerService.CreateOwner(owner);
+                return StatusCode(201, _ownerService.CreateOwner(owner));
             }
             catch (Exception)
             {
@@ -88,7 +88,7 @@ namespace PetShop.WebAPI.Controllers
                 }
                 else
                 {
-                    return owner1;
+                    return StatusCode(202, owner1);
                 }
             }
             catch (Exception)
@@ -111,7 +111,7 @@ namespace PetShop.WebAPI.Controllers
                 }
                 else
                 {
-                    return owner;
+                    return StatusCode(202, owner);
                 }
             }
             catch (Exception)
