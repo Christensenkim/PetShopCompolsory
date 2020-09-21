@@ -15,44 +15,51 @@ namespace PetShop.Core.ApplicationService.Services
             _OwnerRepository = OwnerRepository;
         }
 
-        public Owner CreateOwner(Pet pet)
+        public Owner CreateOwner(Owner owner)
         {
-            throw new NotImplementedException();
+            return _OwnerRepository.Create(owner);
         }
 
         public Owner DeleteOwner(int id)
         {
-            throw new NotImplementedException();
+            return _OwnerRepository.Delete(id);
         }
 
-        public Owner EditOwner(Pet petID)
+        public Owner EditOwner(Owner ownerEdit)
         {
-            throw new NotImplementedException();
+            var owner =  _OwnerRepository.GetOwnerByID(ownerEdit.OwnerID);
+
+            owner.OwnerName = ownerEdit.OwnerName;
+
+            return owner;
         }
 
         public Owner FindOwnerByID(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public List<Owner> FindOwnerByType(string searchedType)
-        {
-            throw new NotImplementedException();
+            return _OwnerRepository.GetOwnerByID(id);
         }
 
         public List<Owner> GetOwners()
         {
-            throw new NotImplementedException();
+            return _OwnerRepository.ReadOwners();
         }
 
         public Owner newOwner(string ownerName)
         {
-            throw new NotImplementedException();
+            var owner = new Owner();
+
+            owner.OwnerName = ownerName;
+
+            return owner;
         }
 
-        public Owner UpdateOwner(int id, Pet pet)
+        public Owner UpdateOwner(int id, Owner ownerUpdate)
         {
-            throw new NotImplementedException();
+            var owner = FindOwnerByID(id);
+
+            owner.OwnerName = ownerUpdate.OwnerName;
+
+            return owner;
         }
     }
 }

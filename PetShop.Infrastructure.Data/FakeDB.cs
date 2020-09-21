@@ -9,6 +9,8 @@ namespace PetShop.Infrastructure.Data
     {
         static int id = 1;
         public static List<Pet> listOfPets = new List<Pet>();
+        public static List<Owner> listOfOwners = new List<Owner>();
+        public static List<PetType> listOfTypes = new List<PetType>();
 
         public static void InitData()
         {
@@ -89,6 +91,34 @@ namespace PetShop.Infrastructure.Data
                 PetPrice = 200
             };
             listOfPets.Add(pet6);
+
+            Owner owner = new Owner()
+            {
+                OwnerID = id++,
+                OwnerName = "Frank"
+            };
+            listOfOwners.Add(owner);
+
+            Owner owner2 = new Owner()
+            {
+                OwnerID = id++,
+                OwnerName = "bob"
+            };
+            listOfOwners.Add(owner2);
+
+            PetType petType = new PetType()
+            {
+                TypeID = id++,
+                Type = "Dog"
+            };
+            listOfTypes.Add(petType);
+
+            PetType petType1 = new PetType()
+            {
+                TypeID = id++,
+                Type = "Cat"
+            };
+            listOfTypes.Add(petType1);
         }
 
         public List<Pet> GetListOfPets()
@@ -104,6 +134,36 @@ namespace PetShop.Infrastructure.Data
         public void RemovePetFromList(Pet pet)
         {
             listOfPets.Remove(pet);
+        }
+
+        public List<Owner> GetListOfOwners()
+        {
+            return listOfOwners;
+        }
+
+        public void AddOwnerToList(Owner owner)
+        {
+            listOfOwners.Add(owner);
+        }
+
+        public void RemoveOwnerFromList(Owner owner)
+        {
+            listOfOwners.Remove(owner);
+        }
+
+        public List<PetType> GetListOfTypes()
+        {
+            return listOfTypes;
+        }
+
+        public void AddTypeToList(PetType type)
+        {
+            listOfTypes.Add(type);
+        }
+
+        public void RemoveTypeFromList(PetType type)
+        {
+            listOfTypes.Remove(type);
         }
 
         public int GetDBID()

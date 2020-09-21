@@ -12,27 +12,52 @@ namespace PetShop.Infrastructure.Data
 
         public Owner Create(Owner owner)
         {
-            throw new NotImplementedException();
+            owner.OwnerID = _fakeDB.GetDBID();
+
+            _fakeDB.AddOwnerToList(owner);
+
+            return owner;
         }
 
         public Owner Delete(int id)
         {
-            throw new NotImplementedException();
+            var ownerFound = this.GetOwnerByID(id);
+            if(ownerFound != null)
+            {
+                _fakeDB.RemoveOwnerFromList(ownerFound);
+                return ownerFound;
+            }
+            return null;
         }
 
         public Owner EditOwner(Owner ownerEdit)
         {
-            throw new NotImplementedException();
+            var ownerFromDB = this.GetOwnerByID(ownerEdit.OwnerID);
+
+            if (ownerFromDB != null)
+            {
+                ownerFromDB.OwnerName = ownerEdit.OwnerName;
+
+                return ownerFromDB;
+            }
+            return null;
         }
 
         public Owner GetOwnerByID(int id)
         {
-            throw new NotImplementedException();
+            foreach (var owner in _fakeDB.GetListOfOwners())
+            {
+                if(owner.OwnerID == id)
+                {
+                    return owner;
+                }
+            }
+            return null;
         }
 
         public List<Owner> ReadOwners()
         {
-            throw new NotImplementedException();
+            return _fakeDB.GetListOfOwners();
         }
     }
 }

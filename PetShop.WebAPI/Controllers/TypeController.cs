@@ -16,36 +16,46 @@ namespace PetShop.WebAPI.Controllers
     {
         private readonly ITypeService _TypeService;
 
+        public TypeController(ITypeService typeService)
+        {
+            _TypeService = typeService;
+        }
+
         // GET: api/<TypeController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<PetType> Get()
         {
-            return new string[] { "value1", "value2" };
+            var types = _TypeService.GetTypes();
+
+            return types;
         }
 
         // GET api/<TypeController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public PetType Get(int id)
         {
-            return "value";
+            return _TypeService.FindTypeByID(id);
         }
 
         // POST api/<TypeController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public PetType Post([FromBody] PetType petType)
         {
+            return _TypeService.CreateType(petType);
         }
 
         // PUT api/<TypeController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] PetType petType)
         {
+            _TypeService.UpdateType(id, petType);
         }
 
         // DELETE api/<TypeController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _TypeService.DeleteType(id);
         }
     }
 }

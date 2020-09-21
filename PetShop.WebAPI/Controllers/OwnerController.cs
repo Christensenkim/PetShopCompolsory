@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Core.ApplicationService;
@@ -15,39 +16,48 @@ namespace PetShop.WebAPI.Controllers
     [ApiController]
     public class OwnerController : ControllerBase
     {
-
         private readonly IOwnerService _ownerService;
+
+        public OwnerController(IOwnerService ownerService)
+        {
+            _ownerService = ownerService;
+        }
 
         // GET: api/<OwnerController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Owner> Get()
         {
-            return new string[] { "value1", "value2" };
+            var owners = _ownerService.GetOwners();
+
+            return owners;
         }
 
         // GET api/<OwnerController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Owner Get(int id)
         {
-            return "value";
+            return _ownerService.FindOwnerByID(id);
         }
 
         // POST api/<OwnerController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public Owner Post([FromBody] Owner value)
         {
+            return _ownerService.CreateOwner(value);
         }
 
         // PUT api/<OwnerController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public void Put(int id, [FromBody] Owner owner)
         {
+            _ownerService.UpdateOwner(id, owner);
         }
 
         // DELETE api/<OwnerController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _ownerService.DeleteOwner(id);
         }
     }
 }

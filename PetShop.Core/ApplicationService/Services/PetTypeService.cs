@@ -15,39 +15,52 @@ namespace PetShop.Core.ApplicationService.Services
             _PetTypeRepository = PetTypeRepository;
         }
 
-        public PetType CreateType(Pet pet)
+        public PetType CreateType(PetType petType)
         {
-            throw new NotImplementedException();
+            return _PetTypeRepository.Create(petType);
         }
 
         public PetType DeleteType(int id)
         {
-            throw new NotImplementedException();
+            return _PetTypeRepository.Delete(id);
         }
 
-        public PetType EditType(Pet petID)
+        public PetType EditType(PetType petTypeID)
         {
-            throw new NotImplementedException();
+            PetType petType = FindTypeByID(petTypeID.TypeID);
+
+            petType.Type = petTypeID.Type;
+
+            return petType;
         }
 
         public PetType FindTypeByID(int id)
         {
-            throw new NotImplementedException();
+            return _PetTypeRepository.GetPetTypeByID(id);
         }
 
         public List<PetType> GetTypes()
         {
-            throw new NotImplementedException();
+            return _PetTypeRepository.ReadTypes();
         }
 
         public PetType newType(string ownerName)
         {
-            throw new NotImplementedException();
+            var petType = new PetType()
+            {
+                Type = ownerName
+            };
+
+            return petType;
         }
 
-        public PetType UpdateType(int id, Pet pet)
+        public PetType UpdateType(int id, PetType petTypeUpdate)
         {
-            throw new NotImplementedException();
+            var petType = FindTypeByID(id);
+
+            petType.Type = petTypeUpdate.Type;
+
+            return petType;
         }
     }
 }

@@ -44,6 +44,10 @@ namespace PetShop.WebAPI
 
             services.AddSingleton<IPetShopRepository, PetshopRepository>();
             services.AddScoped<IPetShopService, PetShopService>();
+            services.AddSingleton<IOwnerRepository, OwnerRepository>();
+            services.AddScoped<IOwnerService, OwnerService>();
+            services.AddSingleton<IPetTypeRepository, PetTypeRepository>();
+            services.AddScoped<ITypeService, PetTypeService>();
             services.AddControllers().AddNewtonsoftJson(o =>
             {
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
