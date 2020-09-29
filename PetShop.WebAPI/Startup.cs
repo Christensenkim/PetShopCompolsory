@@ -64,6 +64,7 @@ namespace PetShop.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                FakeDB.InitData();
             }
 
             app.UseHttpsRedirection();
