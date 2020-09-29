@@ -42,6 +42,14 @@ namespace PetShop.WebAPI
             
             });
 
+            services.AddCors(options =>
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    })
+            );
+
             services.AddSingleton<IPetShopRepository, PetshopRepository>();
             services.AddScoped<IPetShopService, PetShopService>();
             services.AddSingleton<IOwnerRepository, OwnerRepository>();
@@ -70,6 +78,8 @@ namespace PetShop.WebAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
