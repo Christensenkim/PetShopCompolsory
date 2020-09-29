@@ -20,7 +20,7 @@ namespace PetShop.WebAPI
     {
         public static void Main(string[] args)
         {
-            FakeDB.InitData();
+
 
             CreateHostBuilder(args).Build().Run();
         }
