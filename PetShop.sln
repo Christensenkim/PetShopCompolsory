@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop.Core.Entity", "PetS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop.Infrastructure.Data", "PetShop.Infrastructure.Data\PetShop.Infrastructure.Data.csproj", "{D8B35CDB-95A9-41DE-BE74-EF956E3FF11F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShop.WebAPI", "PetShop.WebAPI\PetShop.WebAPI.csproj", "{A007CEBA-1F8D-4E38-9691-5E7C3BCBD69B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop.WebAPI", "PetShop.WebAPI\PetShop.WebAPI.csproj", "{A007CEBA-1F8D-4E38-9691-5E7C3BCBD69B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetShop.Infrastructer.SQLite", "PetShop.Infrastructer.SQLite\PetShop.Infrastructer.SQLite.csproj", "{3EBB8F3E-F5E3-4082-98CE-7DE1C5C4059C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{A007CEBA-1F8D-4E38-9691-5E7C3BCBD69B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A007CEBA-1F8D-4E38-9691-5E7C3BCBD69B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A007CEBA-1F8D-4E38-9691-5E7C3BCBD69B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EBB8F3E-F5E3-4082-98CE-7DE1C5C4059C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EBB8F3E-F5E3-4082-98CE-7DE1C5C4059C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EBB8F3E-F5E3-4082-98CE-7DE1C5C4059C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EBB8F3E-F5E3-4082-98CE-7DE1C5C4059C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
