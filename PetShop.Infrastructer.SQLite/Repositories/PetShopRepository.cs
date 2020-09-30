@@ -2,11 +2,12 @@
 using PetShop.Core.Entity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PetShop.Infrastructer.SQLite.Data.Repositories
 {
-    class PetShopRepository : IPetShopRepository
+    public class PetShopRepository : IPetShopRepository
     {
         readonly PetShopContext _ctx;
 
@@ -16,7 +17,9 @@ namespace PetShop.Infrastructer.SQLite.Data.Repositories
         }
         public Pet Create(Pet pet)
         {
-            throw new NotImplementedException();
+            var newPet = _ctx.Pets.Add(pet).Entity;
+            _ctx.SaveChanges();
+            return newPet;
         }
 
         public Pet Delete(int id)
@@ -41,12 +44,12 @@ namespace PetShop.Infrastructer.SQLite.Data.Repositories
 
         public Pet GetPetByID(int id)
         {
-            throw new NotImplementedException();
+            return _ctx.Pets.FirstOrDefault(c => c.PetId == id);
         }
 
-        public List<Pet> ReadPets(string petType)
+        public IEnumerable<Pet> ReadPets(string petType)
         {
-            throw new NotImplementedException();
+            return _ctx.Pets;
         }
     }
 }

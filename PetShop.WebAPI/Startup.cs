@@ -1,20 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PetShop.Core.ApplicationService;
 using PetShop.Core.ApplicationService.Services;
 using PetShop.Core.DomainService;
-using PetShop.Infrastructure.Data;
+using PetShop.Infrastructer.SQLite;
+using PetShop.Infrastructer.SQLite.Data.Repositories;
 
 namespace PetShop.WebAPI
 {
@@ -50,7 +45,12 @@ namespace PetShop.WebAPI
                     })
             );
 
-            services.AddSingleton<IPetShopRepository, PetshopRepository>();
+            services.AddDbContext<PetShopContext>(
+
+                opt => opt.UseInMemoryDatabase("TheDB")
+                );
+
+            services.AddSingleton<IPetShopRepository, PetShopRepository>();
             services.AddScoped<IPetShopService, PetShopService>();
             services.AddSingleton<IOwnerRepository, OwnerRepository>();
             services.AddScoped<IOwnerService, OwnerService>();
@@ -72,7 +72,6 @@ namespace PetShop.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                FakeDB.InitData();
             }
 
             app.UseHttpsRedirection();

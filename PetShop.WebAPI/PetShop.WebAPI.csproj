@@ -6,13 +6,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PetShop.Core.Entity\PetShop.Core.Entity.csproj" />
     <ProjectReference Include="..\PetShop.Core\PetShop.Core.csproj" />
-    <ProjectReference Include="..\PetShop.Infrastructure.Data\PetShop.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\PetShop.Infrastructer.SQLite\PetShop.Infrastructer.SQLite.Data.csproj" />
   </ItemGroup>
 
 
