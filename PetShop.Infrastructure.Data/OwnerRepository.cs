@@ -55,7 +55,7 @@ namespace PetShop.Infrastructure.Data
             return null;
         }
 
-        public List<Owner> ReadOwners()
+        public IEnumerable<Owner> ReadOwners()
         {
             return _fakeDB.GetListOfOwners();
         }

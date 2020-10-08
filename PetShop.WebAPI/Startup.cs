@@ -8,8 +8,11 @@ using Newtonsoft.Json;
 using PetShop.Core.ApplicationService;
 using PetShop.Core.ApplicationService.Services;
 using PetShop.Core.DomainService;
+using PetShop.Core.Entity;
 using PetShop.Infrastructer.SQLite;
 using PetShop.Infrastructer.SQLite.Data.Repositories;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PetShop.WebAPI
 {
@@ -47,14 +50,16 @@ namespace PetShop.WebAPI
 
             services.AddDbContext<PetShopContext>(
 
-                opt => opt.UseInMemoryDatabase("TheDB")
+                opt => opt.UseSqlite("Data Source=petShop.db")
                 );
 
-            services.AddSingleton<IPetShopRepository, PetShopRepository>();
+
+
+            services.AddTransient<IPetShopRepository, PetShopRepository>();
             services.AddScoped<IPetShopService, PetShopService>();
-            services.AddSingleton<IOwnerRepository, OwnerRepository>();
+            services.AddTransient<IOwnerRepository, OwnerRepository>();
             services.AddScoped<IOwnerService, OwnerService>();
-            services.AddSingleton<IPetTypeRepository, PetTypeRepository>();
+            services.AddTransient<IPetTypeRepository, PetTypeRepository>();
             services.AddScoped<ITypeService, PetTypeService>();
             services.AddControllers().AddNewtonsoftJson(o =>
             {
@@ -72,6 +77,45 @@ namespace PetShop.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<PetShopContext>();
+                    ctx.Database.EnsureDeleted();
+                    ctx.Database.EnsureCreated();
+                    var pet = ctx.Pets.Add(new Pet()
+                    {
+                        PetName = "Max",
+                        PetType = "Dog",
+                        Birthday = DateTime.Parse("2000-01-01"),
+                        SoldDate = DateTime.Parse("2001-02-03"),
+                        PetColor = "brown",
+                        PreviousOwner = "Someone Cool",
+                        PetPrice = 2000
+                    }).Entity;
+
+                    ctx.Pets.Add(new Pet()
+                    {
+                        PetName = "Mox",
+                        PetType = "Cat",
+                        Birthday = DateTime.Parse("2002-01-01"),
+                        SoldDate = DateTime.Parse("2003-02-03"),
+                        PetColor = "Black",
+                        PreviousOwner = "Someone Rad",
+                        PetPrice = 1200
+                    });
+
+                    ctx.Owners.Add(new Owner()
+                    {
+                        OwnerName = "Frank"
+                    });
+
+                    ctx.PetTypes.Add(new PetType()
+                    {
+                        Type = "Cat"
+                    });
+
+                    ctx.SaveChanges();
+                }
             }
 
             app.UseHttpsRedirection();

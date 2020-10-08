@@ -12,7 +12,6 @@ using Newtonsoft.Json;
 using PetShop.Core.ApplicationService;
 using PetShop.Core.ApplicationService.Services;
 using PetShop.Core.DomainService;
-using PetShop.Infrastructure.Data;
 
 namespace PetShop.WebAPI
 {
@@ -20,8 +19,6 @@ namespace PetShop.WebAPI
     {
         public static void Main(string[] args)
         {
-
-
             CreateHostBuilder(args).Build().Run();
         }
 

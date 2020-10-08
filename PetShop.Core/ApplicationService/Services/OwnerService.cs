@@ -2,6 +2,7 @@
 using PetShop.Core.Entity;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace PetShop.Core.ApplicationService.Services
@@ -41,7 +42,7 @@ namespace PetShop.Core.ApplicationService.Services
 
         public List<Owner> GetOwners()
         {
-            return _OwnerRepository.ReadOwners();
+            return _OwnerRepository.ReadOwners().ToList();
         }
 
         public Owner newOwner(string ownerName)

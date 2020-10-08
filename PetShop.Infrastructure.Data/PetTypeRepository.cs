@@ -54,7 +54,7 @@ namespace PetShop.Infrastructure.Data
             return null;
         }
 
-        public List<PetType> ReadTypes()
+        public IEnumerable<PetType> ReadTypes()
         {
             return _fakeDB.GetListOfTypes();
         }

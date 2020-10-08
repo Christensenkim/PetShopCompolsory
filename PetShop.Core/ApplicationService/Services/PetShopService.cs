@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using PetShop.Core.DomainService;
 using PetShop.Core.Entity;
@@ -57,7 +58,7 @@ namespace PetShop.Core.ApplicationService.Services
 
         public List<Pet> GetPets(string petType)
         {
-            return _PetRepository.ReadPets(petType);
+            return _PetRepository.ReadPets(petType).ToList();
         }
 
         public Pet newPet(string petName, string petType, DateTime petBirthday, DateTime petSold, string petColor, string previousOwner, double price)

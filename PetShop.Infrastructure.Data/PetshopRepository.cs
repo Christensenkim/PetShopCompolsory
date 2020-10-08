@@ -83,13 +83,13 @@ namespace PetShop.Infrastructure.Data
             return null;
         }
 
-        public List<Pet> ReadPets(string petTypeInc)
+        public IEnumerable<Pet> ReadPets(string petType)
         {
             List<Pet> petsListFiltered = new List<Pet>();
 
             foreach (var petFromDB in _fakeDB.GetListOfPets())
             {
-                if(petFromDB.PetType == petTypeInc)
+                if (petFromDB.PetType == petType)
                 {
                     petsListFiltered.Add(petFromDB);
                 }
